@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SettingsPageComponent } from './settings-page.component';
+import { TestsModule } from 'src/app/shared/modules/tests.module';
 
 describe('SettingsPageComponent', () => {
   let component: SettingsPageComponent;
@@ -8,9 +9,14 @@ describe('SettingsPageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SettingsPageComponent ]
+      declarations: [
+        SettingsPageComponent
+      ],
+      imports: [
+        TestsModule
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -7,7 +7,10 @@
       </header>
 
       <div class="w3-container">
-        <p>Lorem ipsum...</p>
+        <p-button class="w3-margin" label="Click" (onClick)="getLatestExchangeRates()"></p-button>
+        <p>
+          {{exchangeRates}}
+        </p>
       </div>
 
       <footer class="w3-container w3-light-green">
