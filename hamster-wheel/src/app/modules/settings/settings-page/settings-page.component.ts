@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
-import { BaseClass } from 'src/app/core/base-class/base.class';
 import { ApiService } from 'src/app/core/services/api.service';
-import { LoggerService } from 'src/app/core/services/logger.service';
+import { BaseClass } from 'src/app/shared/components/base-class/base.class';
+import { ExchangeRateModel } from 'src/app/shared/models/exchange-rate.model';
 
 @Component({
   selector: 'app-settings-page',
@@ -11,10 +11,9 @@ import { LoggerService } from 'src/app/core/services/logger.service';
 })
 export class SettingsPageComponent extends BaseClass implements OnInit {
 
-  exchangeRates: any;
+  exchangeRates: ExchangeRateModel;
 
   constructor(
-    private logger: LoggerService,
     private api: ApiService
   ) {
     super();
@@ -23,11 +22,13 @@ export class SettingsPageComponent extends BaseClass implements OnInit {
   ngOnInit() {
   }
 
-  getLatestExchangeRates() {
-    this.api.getExchangeRates().pipe(takeUntil(this.ngUnsubscribe))
+  public getLatestExchangeRates() {
+    this.api.getRemoteExchangeRates().pipe
+      (takeUntil(this.ngUnsubscribe))
       .subscribe(result => {
         this.exchangeRates = result.body;
         console.log(result);
       });
   }
+
 }
