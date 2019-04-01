@@ -14,4 +14,5 @@ import { HomeRoutingModule } from './home-routing.module';
     HomeRoutingModule
   ]
 })
+
 export class HomeModule { }

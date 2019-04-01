@@ -18,5 +18,4 @@ import { PrimeNgModule } from './prime-ng.module';
     providers: []
 })
 
-export class TestsModule {
-}
+export class TestsModule { }

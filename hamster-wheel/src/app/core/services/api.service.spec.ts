@@ -10,7 +10,7 @@ describe('ApiService', () => {
         TestsModule
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   it('should be created', () => {

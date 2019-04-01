@@ -25,4 +25,5 @@ import { SharedModule } from './shared/shared.module';
     AppComponent
   ]
 })
+
 export class AppModule { }

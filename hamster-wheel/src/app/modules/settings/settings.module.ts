@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { SettingsPageComponent } from './settings-page/settings-page.component';
 import { SettingsRoutingModule } from './settings-routing.module';
-import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -14,4 +14,5 @@ import { SharedModule } from 'src/app/shared/shared.module';
     SettingsRoutingModule
   ]
 })
+
 export class SettingsModule { }
