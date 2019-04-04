@@ -1,5 +1,5 @@
 import { async, TestBed } from '@angular/core/testing';
-import { TestsModule } from 'src/app/shared/modules/tests.module';
+import { TestsModule } from '../../shared/modules/tests.module';
 import { ApiService } from './api.service';
 
 describe('ApiService', () => {

@@ -14,6 +14,7 @@ import { PrimeNgModule } from './modules/prime-ng.module';
     PrimeNgModule
   ],
   exports: [
+    CommonModule,
     PrimeNgModule,
     NavigationComponent
   ]

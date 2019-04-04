@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
-import { ApiService } from 'src/app/core/services/api.service';
-import { BaseClass } from 'src/app/shared/components/base-class/base.class';
-import { ExchangeRateModel } from 'src/app/shared/models/exchange-rate.model';
+import { ApiService } from '../../../core/services/api.service';
+import { BaseComponent } from '../../../shared/components/base-component/base.component';
+import { ExchangeRateModel } from '../../../shared/models/exchange-rate.model';
 
 @Component({
   selector: 'app-settings-page',
   templateUrl: './settings-page.component.html',
   styleUrls: ['./settings-page.component.css']
 })
-export class SettingsPageComponent extends BaseClass implements OnInit {
+export class SettingsPageComponent extends BaseComponent implements OnInit {
 
   exchangeRates: ExchangeRateModel;
 
