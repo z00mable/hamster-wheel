@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AppConfig, APP_CONFIG } from './configs/app.config';
 import { CoreModule } from './core/core.module';
+import { HttpErrorHandlerService } from './core/services/http-error-handler.service';
 import { SharedModule } from './shared/shared.module';
 
 @NgModule({
@@ -19,7 +20,8 @@ import { SharedModule } from './shared/shared.module';
     SharedModule
   ],
   providers: [
-    { provide: APP_CONFIG, useValue: AppConfig }
+    { provide: APP_CONFIG, useValue: AppConfig },
+    HttpErrorHandlerService
   ],
   bootstrap: [
     AppComponent

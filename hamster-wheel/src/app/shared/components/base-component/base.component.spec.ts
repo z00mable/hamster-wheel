@@ -1,6 +1,6 @@
 import { BaseComponent } from './base.component';
 
-describe('BaseClass', () => {
+describe('BaseComponent', () => {
   it('should create an instance', () => {
     expect(new BaseComponent()).toBeTruthy();
   });

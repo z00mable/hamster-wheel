@@ -6,7 +6,8 @@ import { NgModule, Optional, SkipSelf } from '@angular/core';
   imports: [
     CommonModule
   ],
-  exports: []
+  exports: [],
+  providers: []
 })
 
 export class CoreModule {

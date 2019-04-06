@@ -1,6 +1,7 @@
 import { async, TestBed } from '@angular/core/testing';
 import { TestsModule } from '../../shared/modules/tests.module';
 import { ApiService } from './api.service';
+import { HttpErrorHandlerService } from './http-error-handler.service';
 
 describe('ApiService', () => {
   beforeEach(async(() => {
@@ -8,6 +9,9 @@ describe('ApiService', () => {
       declarations: [],
       imports: [
         TestsModule
+      ],
+      providers: [
+        HttpErrorHandlerService
       ]
     })
       .compileComponents();

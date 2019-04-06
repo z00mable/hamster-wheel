@@ -17,12 +17,13 @@ export class ApiService {
     private http: HttpClient,
     private httpErrorHandler: HttpErrorHandlerService
   ) {
+    this.handleError = httpErrorHandler.createHandleError('ApiService');
+
     this.httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     };
-    this.handleError = httpErrorHandler.createHandleError('ApiService');
   }
 
   httpOptions: any;
