@@ -7,15 +7,7 @@
       </header>
 
       <div class="w3-container">
-        <form [formGroup]="transactionForm" (ngSubmit)="addTransaction(transactionForm.value, transactionForm.valid)">
-          <input type="text" placeholder="Exchange" formControlName="exchange">
-          <input type="date" placeholder="Date" formControlName="date">
-          <input type="number" placeholder="Amount Out" formControlName="amountOut">
-          <input type="text" placeholder="Used" formControlName="used">
-          <input type="number" placeholder="Amount In" formControlName="amountIn">
-          <input type="text" placeholder="Got" formControlName="got">
-          <button class="w3-margin" type="submit" [disabled]="!transactionForm.valid">Add</button>
-        </form>
+        <app-transaction-submission-form [transactions]="transactions"></app-transaction-submission-form>
       </div>
 
       <footer class="w3-container w3-light-green">
@@ -38,7 +30,7 @@
         <p-table [value]="transactionRows">
           <ng-template pTemplate="header">
             <tr>
-              <th *ngFor="let col of columns">
+              <th *ngFor="let col of transactionColumns">
                 {{col.header}}
               </th>
             </tr>
