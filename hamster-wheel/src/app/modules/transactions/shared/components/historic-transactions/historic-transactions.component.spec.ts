@@ -1,22 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
+import { TableModule } from 'primeng/table';
 import { TransactionControlService } from '../../services/transaction-control.service';
 import { TransactionsService } from '../../services/transactions.service';
-import { TransactionFormControlComponent } from '../transaction-form-control/transaction-form-control.component';
-import { TransactionSubmissionFormComponent } from './transaction-submission-form.component';
+import { HistoricTransactionsComponent } from './historic-transactions.component';
 
-describe('TransactionSubmissionFormComponent', () => {
-  let component: TransactionSubmissionFormComponent;
-  let fixture: ComponentFixture<TransactionSubmissionFormComponent>;
+describe('HistoricTransactionsComponent', () => {
+  let component: HistoricTransactionsComponent;
+  let fixture: ComponentFixture<HistoricTransactionsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        TransactionSubmissionFormComponent,
-        TransactionFormControlComponent
+        HistoricTransactionsComponent
       ],
       imports: [
-        ReactiveFormsModule
+        TableModule
       ],
       providers: [
         TransactionControlService,
@@ -27,7 +25,7 @@ describe('TransactionSubmissionFormComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TransactionSubmissionFormComponent);
+    fixture = TestBed.createComponent(HistoricTransactionsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

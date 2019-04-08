@@ -1,24 +1,26 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { BaseComponent } from '../../../../../shared/components/base-component/base.component';
 import { TransactionFormBase } from '../../models/transaction-form-base.model';
 import { TransactionControlService } from '../../services/transaction-control.service';
-import { TransactionModel } from 'src/app/shared/models/transaction.model';
-import { BaseComponent } from 'src/app/shared/components/base-component/base.component';
+import { TransactionsService } from '../../services/transactions.service';
 
 @Component({
   selector: 'app-transaction-submission-form',
   templateUrl: './transaction-submission-form.component.html',
-  styleUrls: ['./transaction-submission-form.component.css'],
-  providers: [TransactionControlService]
+  styleUrls: ['./transaction-submission-form.component.css']
 })
 export class TransactionSubmissionFormComponent extends BaseComponent implements OnInit {
 
-  @Input() transactions: TransactionFormBase<any>[] = [];
+  transactions: TransactionFormBase<any>[] = [];
   form: FormGroup;
-  payLoad: TransactionModel;
 
-  constructor(private transactionControlService: TransactionControlService) {
+  constructor(
+    private transactionsService: TransactionsService,
+    private transactionControlService: TransactionControlService
+  ) {
     super();
+    this.transactions = this.transactionsService.getTransactions();
   }
 
   ngOnInit() {
@@ -26,7 +28,6 @@ export class TransactionSubmissionFormComponent extends BaseComponent implements
   }
 
   addTransaction() {
-    this.payLoad = this.form.value;
     this.transactionControlService.addTransaction(this.form.value);
   }
 }

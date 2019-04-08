@@ -1,16 +1,13 @@
 <div>
   <form (ngSubmit)="addTransaction()" [formGroup]="form">
- 
+
     <div *ngFor="let transaction of transactions" class="form-row">
       <app-transaction-form-control [transaction]="transaction" [form]="form"></app-transaction-form-control>
     </div>
- 
+
     <div class="form-row">
       <button type="submit" [disabled]="!form.valid">Save</button>
     </div>
   </form>
- 
-  <div *ngIf="payLoad" class="form-row">
-    <strong>Saved the following values</strong><br>{{payLoad}}
-  </div>
+
 </div>
