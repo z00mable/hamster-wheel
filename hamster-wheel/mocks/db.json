@@ -1,0 +1,14 @@
+{
+  "transactions": [
+    {
+      "exchange": "Coinbase",
+      "date": "2017-12-11",
+      "buyCurrency": "ETH",
+      "buyAmount": "0.59796008",
+      "sellCurrency": "EUR",
+      "sellAmount": "250",
+      "exchangeRate": 402.05,
+      "id": 1
+    }
+  ]
+}

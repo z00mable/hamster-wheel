@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '../../../../../shared/components/base-component/base.component';
 import { TransactionModel } from '../../../../../shared/models/transaction.model';
-import { TransactionControlService } from '../../services/transaction-control.service';
+import { TransactionApiService } from '../../services/transaction-api.service';
 import { TransactionsService } from '../../services/transactions.service';
 
 @Component({
@@ -16,16 +16,21 @@ export class HistoricTransactionsComponent extends BaseComponent implements OnIn
 
   constructor(
     private transactionsService: TransactionsService,
-    private transactionControlService: TransactionControlService
+    private transactionApiService: TransactionApiService
   ) {
     super();
     this.columns = this.transactionsService.getTransactionColumns();
   }
 
   ngOnInit() {
-    this.transactionControlService.transactionToAdd$.subscribe(
+    this.transactionApiService.getAllTransactions().subscribe(
+      result => {
+        this.rows = result;
+      }
+    );
+
+    this.transactionApiService.transactionLocalAdd$.subscribe(
       transaction => {
-        console.log(this.rows);
         this.rows.push(transaction);
       }
     );

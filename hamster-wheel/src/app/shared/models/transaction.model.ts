@@ -1,8 +1,11 @@
-export class TransactionModel {
+export interface TransactionModel {
+    id: number;
     exchange: string;
     date: Date;
-    amountOut: number;
-    used: string;
-    amountIn: number;
-    got: string;
+    buyCurrency: string;
+    buyAmount: number;
+    sellCurrency: string;
+    sellAmount: number;
+    exchangeRate: number;
+    historicExchangeRate: number;
 }

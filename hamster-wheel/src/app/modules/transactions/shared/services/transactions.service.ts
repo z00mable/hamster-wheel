@@ -12,7 +12,7 @@ export class TransactionsService {
 
       new TransactionFormTextbox({
         key: 'exchange',
-        label: 'Echange',
+        label: 'Exchange',
         type: 'text',
         value: 'Coinbase',
         required: true,
@@ -23,6 +23,7 @@ export class TransactionsService {
         key: 'date',
         label: 'Date',
         type: 'date',
+        value: new Date(),
         required: true,
         order: 2
       }),
@@ -68,8 +69,12 @@ export class TransactionsService {
   }
 
   getTransactionColumns() {
-    return this.getTransactions().map(x => {
+    const columns = this.getTransactions().map(x => {
       return { field: x.key, header: x.label };
     });
+
+    columns.push({ field: 'exchangeRate', header: 'Exchange Rate' });
+    columns.push({ field: 'historicExchangeRate', header: 'Historic Exchange Rate' });
+    return columns;
   }
 }

@@ -1,10 +1,10 @@
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { AppConfig } from '../../configs/app.config';
 import { ExchangeRateModel } from '../../shared/models/exchange-rate.model';
-import { HttpErrorHandlerService, HandleError } from './http-error-handler.service';
+import { HandleError, HttpErrorHandlerService } from './http-error-handler.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,30 +17,36 @@ export class ApiService {
     private http: HttpClient,
     private httpErrorHandler: HttpErrorHandlerService
   ) {
-    this.handleError = httpErrorHandler.createHandleError('ApiService');
-
-    this.httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    };
+    this.handleError = this.httpErrorHandler.createHandleError('ApiService');
   }
-
-  httpOptions: any;
 
   public getRemoteExchangeRates(): Observable<HttpResponse<ExchangeRateModel>> {
-    return this.http.get<HttpResponse<ExchangeRateModel>>(AppConfig.exchangeRateApi + '/latest');
+    return this.http.get<HttpResponse<ExchangeRateModel>>(AppConfig.exchangeRateApi + '/latest')
+      .pipe(
+        catchError(this.handleError('getRemoteExchangeRates', null))
+      );
   }
 
-  public addLocalExchangeRates(exchageRates: ExchangeRateModel) {
-    return this.http.post<ExchangeRateModel>(AppConfig.localUrl + '/exchange-rate', exchageRates, this.httpOptions)
+  public getHistoricEurRate(date: Date): Observable<any> {
+    return this.http.get<any>(AppConfig.exchangeRateApi + '/' + date)
+      .pipe(
+        catchError(this.handleError('getHistoricEurRate', null))
+      );
+  }
+
+  public addLocalExchangeRates(exchageRates: ExchangeRateModel): Observable<ExchangeRateModel> {
+    return this.http.post<ExchangeRateModel>(AppConfig.localUrl + '/exchange-rate', exchageRates, {
+      headers: new HttpHeaders().set('Accept', 'application/json')
+    })
       .pipe(
         catchError(this.handleError('addLocalExchangeRates', exchageRates))
       );
   }
 
-  public updateLocalExchangeRates(exchageRates: ExchangeRateModel) {
-    return this.http.put<ExchangeRateModel>(AppConfig.localUrl + '/exchange-rate', exchageRates, this.httpOptions)
+  public updateLocalExchangeRates(exchageRates: ExchangeRateModel): Observable<ExchangeRateModel> {
+    return this.http.put<ExchangeRateModel>(AppConfig.localUrl + '/exchange-rate', exchageRates, {
+      headers: new HttpHeaders().set('Accept', 'application/json')
+    })
       .pipe(
         catchError(this.handleError('updateLocalExchangeRates', exchageRates))
       );
