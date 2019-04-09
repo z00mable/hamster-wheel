@@ -31,11 +31,9 @@ export class TransactionSubmissionFormComponent extends BaseComponent implements
   }
 
   addTransaction() {
-    this.transactionApiService.addLocalTransaction(this.form.value).subscribe(
+    this.transactionApiService.enrichAndSaveLocalTransaction(this.form.value).subscribe(
       result => {
-        result[1].historicExchangeRate = result[0].rates.USD;
-        result[1].exchangeRate = result[1].sellAmount / result[1].buyAmount;
-        this.transactionApiService.addTransaction(result[1]);
+        this.transactionApiService.addTransaction(result);
       }
     );
   }

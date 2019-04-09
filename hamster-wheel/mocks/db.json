@@ -7,6 +7,7 @@
       "buyAmount": "0.59796008",
       "sellCurrency": "EUR",
       "sellAmount": "250",
+      "historicExchangeRate": 1.1796,
       "exchangeRate": 402.05,
       "id": 1
     }

@@ -1,6 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
-import { TableModule } from 'primeng/table';
+import { TestsModule } from '../../../shared/modules/tests.module';
 import { HistoricTransactionsComponent } from '../shared/components/historic-transactions/historic-transactions.component';
 import { TransactionFormControlComponent } from '../shared/components/transaction-form-control/transaction-form-control.component';
 import { TransactionSubmissionFormComponent } from '../shared/components/transaction-submission-form/transaction-submission-form.component';
@@ -22,8 +21,7 @@ describe('TransactionsPageComponent', () => {
         HistoricTransactionsComponent
       ],
       imports: [
-        ReactiveFormsModule,
-        TableModule
+        TestsModule
       ],
       providers: [
         TransactionsService,

@@ -1,11 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subject, forkJoin } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { catchError, mergeMap } from 'rxjs/operators';
 import { AppConfig } from '../../../../configs/app.config';
+import { ApiService } from '../../../../core/services/api.service';
 import { HandleError, HttpErrorHandlerService } from '../../../../core/services/http-error-handler.service';
 import { TransactionModel } from '../../../../shared/models/transaction.model';
-import { ApiService } from '../../../../core/services/api.service';
 
 @Injectable()
 export class TransactionApiService {
@@ -34,10 +34,15 @@ export class TransactionApiService {
     this.transactionAddSource.next(transaction);
   }
 
-  public addLocalTransaction(transaction: TransactionModel): Observable<any[]> {
-    const response1 = this.apiService.getHistoricEurRate(transaction.date);
-    const response2 = this.saveLocalTransaction(transaction);
-    return forkJoin([response1, response2]);
+  public enrichAndSaveLocalTransaction(transaction: TransactionModel): Observable<TransactionModel> {
+    return this.apiService.getHistoricEurRate(transaction.date)
+      .pipe(
+        mergeMap(data => {
+          transaction.historicExchangeRate = data.rates.USD;
+          transaction.exchangeRate = transaction.sellAmount / transaction.buyAmount;
+          return this.saveLocalTransaction(transaction);
+        }), catchError(this.handleError('enrichAndSaveLocalTransaction', transaction))
+      )
   }
 
   private saveLocalTransaction(transaction: TransactionModel): Observable<TransactionModel> {
@@ -48,7 +53,7 @@ export class TransactionApiService {
         { headers: new HttpHeaders().set('Accept', 'application/json') }
       )
       .pipe(
-        catchError(this.handleError('addLocalTransaction', transaction))
+        catchError(this.handleError('saveLocalTransaction', transaction))
       );
   }
 }

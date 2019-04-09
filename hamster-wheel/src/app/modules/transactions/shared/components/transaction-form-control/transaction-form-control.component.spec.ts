@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
+import { TestsModule } from '../../../../../shared/modules/tests.module';
 import { TransactionFormControlComponent } from './transaction-form-control.component';
 
 describe('TransactionFormControlComponent', () => {
@@ -12,7 +12,7 @@ describe('TransactionFormControlComponent', () => {
         TransactionFormControlComponent
       ],
       imports: [
-        ReactiveFormsModule
+        TestsModule
       ]
     })
       .compileComponents();
