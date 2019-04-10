@@ -8,4 +8,6 @@ export interface TransactionModel {
     sellAmount: number;
     exchangeRate: number;
     historicExchangeRate: number;
+    sellAmountInUsd: number;
+    exchangeRateInUsd: number;
 }

@@ -13,7 +13,7 @@ export class TransactionsService {
       new TransactionFormTextbox({
         key: 'exchange',
         label: 'Exchange',
-        type: 'text',
+        type: 'string',
         value: 'Coinbase',
         required: true,
         order: 1
@@ -23,7 +23,7 @@ export class TransactionsService {
         key: 'date',
         label: 'Date',
         type: 'date',
-        value: new Date(),
+        value: new Date().toJSON().slice(0, 10),
         required: true,
         order: 2
       }),
@@ -31,9 +31,8 @@ export class TransactionsService {
       new TransactionFormTextbox({
         key: 'buyCurrency',
         label: 'Buy Currency',
-        type: 'text',
-        value: 'Eth',
-        required: true,
+        type: 'string',
+        value: 'ETH',
         order: 3
       }),
 
@@ -41,7 +40,6 @@ export class TransactionsService {
         key: 'buyAmount',
         label: 'Buy Amount',
         type: 'number',
-        value: '123',
         required: true,
         order: 4
       }),
@@ -49,9 +47,8 @@ export class TransactionsService {
       new TransactionFormTextbox({
         key: 'sellCurrency',
         label: 'Sell Currency',
-        type: 'text',
-        value: '$',
-        required: true,
+        type: 'string',
+        value: 'EUR',
         order: 5
       }),
 
@@ -59,7 +56,6 @@ export class TransactionsService {
         key: 'sellAmount',
         label: 'Sell Amount',
         type: 'number',
-        value: '123',
         required: true,
         order: 6
       })
@@ -74,7 +70,9 @@ export class TransactionsService {
     });
 
     columns.push({ field: 'exchangeRate', header: 'Exchange Rate' });
-    columns.push({ field: 'historicExchangeRate', header: 'Historic Exchange Rate' });
+    columns.push({ field: 'historicExchangeRate', header: 'Historic Exchange Rate (USD)' });
+    columns.push({ field: 'sellAmountInUsd', header: 'Sell Amount In USD' });
+    columns.push({ field: 'exchangeRateInUsd', header: 'Exchange Rate In USD' });
     return columns;
   }
 }

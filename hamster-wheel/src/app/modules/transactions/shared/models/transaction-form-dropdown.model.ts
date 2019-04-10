@@ -7,5 +7,7 @@ export class TransactionFormDropdown extends TransactionFormBase<string> {
     constructor(options: {} = {}) {
         super(options);
         this.options = options['options'.toString()] || [];
+        console.log(this.options);
+        
     }
 }

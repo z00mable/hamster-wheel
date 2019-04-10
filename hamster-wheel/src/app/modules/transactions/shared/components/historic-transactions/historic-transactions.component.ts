@@ -13,6 +13,8 @@ export class HistoricTransactionsComponent extends BaseComponent implements OnIn
 
   rows: TransactionModel[] = [];
   columns: any;
+  totalInSellingCurrency: number;
+  totalInUsd: number;
 
   constructor(
     private transactionsService: TransactionsService,
@@ -20,18 +22,24 @@ export class HistoricTransactionsComponent extends BaseComponent implements OnIn
   ) {
     super();
     this.columns = this.transactionsService.getTransactionColumns();
+    this.totalInSellingCurrency = 0;
+    this.totalInUsd = 0;
   }
 
   ngOnInit() {
     this.transactionApiService.getAllTransactions().subscribe(
       result => {
         this.rows = result;
+        this.totalInSellingCurrency = result.map((item) => item.sellAmount).reduce((sum, current) => sum + current);
+        this.totalInUsd = result.map((item) => item.sellAmountInUsd).reduce((sum, current) => sum + current);
       }
     );
 
     this.transactionApiService.transactionLocalAdd$.subscribe(
       transaction => {
         this.rows.push(transaction);
+        this.totalInSellingCurrency += transaction.sellAmount;
+        this.totalInUsd += transaction.sellAmountInUsd;
       }
     );
   }

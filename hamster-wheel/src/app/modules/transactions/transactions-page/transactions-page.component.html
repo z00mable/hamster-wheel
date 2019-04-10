@@ -1,39 +1,21 @@
 <div class="w3-row-padding w3-margin">
   <div class="w3-col l12 m12 s12">
-    <div class="w3-card-4">
-
-      <header class="w3-container w3-light-green">
-        <h2>Add Transaction</h2>
-      </header>
-
+    <p-fieldset [toggleable]="true" [collapsed]="true">
+      <p-header>Add Fiat - Crypto Transaction</p-header>
       <div class="w3-container w3-margin">
         <app-transaction-submission-form></app-transaction-submission-form>
       </div>
-
-      <footer class="w3-container w3-light-green">
-        <h5>Footer</h5>
-      </footer>
-
-    </div>
+    </p-fieldset>
   </div>
 </div>
 
 <div class="w3-row-padding w3-margin">
   <div class="w3-col l12 m12 s12">
-    <div class="w3-card-4">
-
-      <header class="w3-container w3-light-green">
-        <h2>Historic Transactions</h2>
-      </header>
-
+    <p-fieldset [toggleable]="true" [collapsed]="false">
+      <p-header>Historic Fiat - Crypto Transactions</p-header>
       <div class="w3-container w3-margin">
         <app-historic-transactions></app-historic-transactions>
       </div>
-
-      <footer class="w3-container w3-light-green">
-        <h5>Footer</h5>
-      </footer>
-
-    </div>
+    </p-fieldset>
   </div>
 </div>

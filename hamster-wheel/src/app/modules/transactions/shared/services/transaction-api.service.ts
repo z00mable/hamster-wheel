@@ -40,6 +40,8 @@ export class TransactionApiService {
         mergeMap(data => {
           transaction.historicExchangeRate = data.rates.USD;
           transaction.exchangeRate = transaction.sellAmount / transaction.buyAmount;
+          transaction.sellAmountInUsd = transaction.sellAmount * data.rates.USD;
+          transaction.exchangeRateInUsd = transaction.exchangeRate * data.rates.USD;
           return this.saveLocalTransaction(transaction);
         }), catchError(this.handleError('enrichAndSaveLocalTransaction', transaction))
       )
