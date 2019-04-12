@@ -1,15 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { BaseComponent } from '../../../shared/components/base-component/base.component';
+import { SelectItem } from 'primeng/components/common/selectitem';
 
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.css']
 })
-export class HomePageComponent extends BaseComponent implements OnInit {
+export class HomePageComponent implements OnInit {
+
+  currencies: SelectItem[];
+  selectedCurrency: string;
 
   constructor() {
-    super();
+    this.currencies = [];
+    this.currencies.push({ title: 'USD', value: 'USD', icon: 'fas fa-dollar-sign' });
+    this.currencies.push({ title: 'EUR', value: 'EUR', icon: 'fas fa-euro-sign' });
+    this.selectedCurrency = this.currencies[0].value;
   }
 
   ngOnInit() {

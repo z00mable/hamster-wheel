@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { takeUntil } from 'rxjs/operators';
+import { TransactionApiService } from '../../../../../core/services/transaction-api.service';
 import { BaseComponent } from '../../../../../shared/components/base-component/base.component';
 import { TransactionFormBase } from '../../models/transaction-form-base.model';
-import { TransactionApiService } from '../../services/transaction-api.service';
 import { TransactionControlService } from '../../services/transaction-control.service';
 import { TransactionsService } from '../../services/transactions.service';
 
@@ -31,10 +32,12 @@ export class TransactionSubmissionFormComponent extends BaseComponent implements
   }
 
   addTransaction() {
-    this.transactionApiService.enrichAndSaveLocalTransaction(this.form.value).subscribe(
-      result => {
-        this.transactionApiService.addTransaction(result);
-      }
-    );
+    this.transactionApiService.enrichAndSaveLocalTransaction(this.form.value).pipe
+      (takeUntil(this.ngUnsubscribe))
+      .subscribe(
+        result => {
+          this.transactionApiService.addTransaction(result);
+        }
+      );
   }
 }

@@ -1,11 +1,11 @@
 import { TestBed } from '@angular/core/testing';
-import { TestsModule } from '../../../../shared/modules/tests.module';
+import { TestsModule } from '../../shared/modules/tests.module';
 import { TransactionApiService } from './transaction-api.service';
 
 describe('TransactionApiService', () => {
   beforeEach(() => TestBed.configureTestingModule({
     imports: [
-      TestsModule
+      TestsModule,
     ],
     providers: [
       TransactionApiService

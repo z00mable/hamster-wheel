@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { takeUntil } from 'rxjs/operators';
+import { TransactionApiService } from '../../../../../core/services/transaction-api.service';
 import { BaseComponent } from '../../../../../shared/components/base-component/base.component';
 import { TransactionModel } from '../../../../../shared/models/transaction.model';
-import { TransactionApiService } from '../../services/transaction-api.service';
 import { TransactionsService } from '../../services/transactions.service';
 
 @Component({
@@ -27,20 +28,24 @@ export class HistoricTransactionsComponent extends BaseComponent implements OnIn
   }
 
   ngOnInit() {
-    this.transactionApiService.getAllTransactions().subscribe(
-      result => {
-        this.rows = result;
-        this.totalInSellingCurrency = result.map((item) => item.sellAmount).reduce((sum, current) => sum + current);
-        this.totalInUsd = result.map((item) => item.sellAmountInUsd).reduce((sum, current) => sum + current);
-      }
-    );
+    this.transactionApiService.getAllTransactions().pipe
+      (takeUntil(this.ngUnsubscribe))
+      .subscribe(
+        result => {
+          this.rows = result;
+          this.totalInSellingCurrency = result.map((item) => item.sellAmount).reduce((sum, current) => sum + current);
+          this.totalInUsd = result.map((item) => item.sellAmountInUsd).reduce((sum, current) => sum + current);
+        }
+      );
 
-    this.transactionApiService.transactionLocalAdd$.subscribe(
-      transaction => {
-        this.rows.push(transaction);
-        this.totalInSellingCurrency += transaction.sellAmount;
-        this.totalInUsd += transaction.sellAmountInUsd;
-      }
-    );
+    this.transactionApiService.transactionLocalAdd$.pipe
+      (takeUntil(this.ngUnsubscribe))
+      .subscribe(
+        transaction => {
+          this.rows.push(transaction);
+          this.totalInSellingCurrency += transaction.sellAmount;
+          this.totalInUsd += transaction.sellAmountInUsd;
+        }
+      );
   }
 }

@@ -2,10 +2,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { catchError, mergeMap } from 'rxjs/operators';
-import { AppConfig } from '../../../../configs/app.config';
-import { ApiService } from '../../../../core/services/api.service';
-import { HandleError, HttpErrorHandlerService } from '../../../../core/services/http-error-handler.service';
-import { TransactionModel } from '../../../../shared/models/transaction.model';
+import { AppConfig } from '../../configs/app.config';
+import { ApiService } from './api.service';
+import { HandleError, HttpErrorHandlerService } from './http-error-handler.service';
+import { TransactionModel } from '../../shared/models/transaction.model';
 
 @Injectable()
 export class TransactionApiService {

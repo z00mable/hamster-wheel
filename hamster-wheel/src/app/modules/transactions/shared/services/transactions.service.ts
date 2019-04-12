@@ -14,6 +14,7 @@ export class TransactionsService {
         key: 'exchange',
         label: 'Exchange',
         type: 'string',
+        pipe: 'string',
         value: 'Coinbase',
         required: true,
         order: 1
@@ -23,6 +24,7 @@ export class TransactionsService {
         key: 'date',
         label: 'Date',
         type: 'date',
+        pipe: 'date',
         value: new Date().toJSON().slice(0, 10),
         required: true,
         order: 2
@@ -32,6 +34,7 @@ export class TransactionsService {
         key: 'buyCurrency',
         label: 'Buy Currency',
         type: 'string',
+        pipe: 'string',
         value: 'ETH',
         order: 3
       }),
@@ -40,6 +43,7 @@ export class TransactionsService {
         key: 'buyAmount',
         label: 'Buy Amount',
         type: 'number',
+        pipe: 'number4',
         required: true,
         order: 4
       }),
@@ -48,6 +52,7 @@ export class TransactionsService {
         key: 'sellCurrency',
         label: 'Sell Currency',
         type: 'string',
+        pipe: 'string',
         value: 'EUR',
         order: 5
       }),
@@ -56,6 +61,7 @@ export class TransactionsService {
         key: 'sellAmount',
         label: 'Sell Amount',
         type: 'number',
+        pipe: 'currencyEur',
         required: true,
         order: 6
       })
@@ -66,13 +72,13 @@ export class TransactionsService {
 
   getTransactionColumns() {
     const columns = this.getTransactions().map(x => {
-      return { field: x.key, header: x.label };
+      return { field: x.key, header: x.label, pipe: x.pipe };
     });
 
-    columns.push({ field: 'exchangeRate', header: 'Exchange Rate' });
-    columns.push({ field: 'historicExchangeRate', header: 'Historic Exchange Rate (USD)' });
-    columns.push({ field: 'sellAmountInUsd', header: 'Sell Amount In USD' });
-    columns.push({ field: 'exchangeRateInUsd', header: 'Exchange Rate In USD' });
+    columns.push({ field: 'exchangeRate', header: 'Exchange Rate', pipe: 'number' });
+    columns.push({ field: 'historicExchangeRate', header: 'Historic Exchange Rate (USD)', pipe: 'currencyDollar4' });
+    columns.push({ field: 'sellAmountInUsd', header: 'Sell Amount In USD', pipe: 'currencyDollar' });
+    columns.push({ field: 'exchangeRateInUsd', header: 'Exchange Rate In USD', pipe: 'currencyDollar' });
     return columns;
   }
 }

@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { TestsModule } from '../../../../../shared/modules/tests.module';
-import { TransactionApiService } from '../../services/transaction-api.service';
+import { TransactionApiService } from '../../../../../core/services/transaction-api.service';
 import { TransactionsService } from '../../services/transactions.service';
 import { HistoricTransactionsComponent } from './historic-transactions.component';
 

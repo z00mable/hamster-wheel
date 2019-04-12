@@ -8,9 +8,15 @@
   </ng-template>
   <ng-template pTemplate="body" let-row>
     <tr>
-      <td *ngFor="let col of columns">
-        {{row[col.field]}}
-      </td>
+      <ng-container *ngFor="let col of columns" [ngSwitch]="col.pipe">
+          <td *ngSwitchCase="'string'"> {{row[col.field]}} </td>
+          <td *ngSwitchCase="'number'"> {{row[col.field] | number:'1.0-2'}} </td>
+          <td *ngSwitchCase="'number4'"> {{row[col.field] | number:'1.0-4'}} </td>
+          <td *ngSwitchCase="'date'"> {{row[col.field] | date}} </td>
+          <td *ngSwitchCase="'currencyEur'"> {{row[col.field] | currency:'EUR'}} </td>
+          <td *ngSwitchCase="'currencyDollar'"> {{row[col.field] | currency}} </td>
+          <td *ngSwitchCase="'currencyDollar4'"> {{row[col.field] | currency:'USD':'symbol':'1.4-4'}} </td>
+      </ng-container>
     </tr>
   </ng-template>
   <ng-template pTemplate="footer">

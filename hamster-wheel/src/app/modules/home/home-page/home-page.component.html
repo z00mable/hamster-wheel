@@ -4,10 +4,11 @@
 
       <header class="w3-container w3-light-green">
         <h2>Home</h2>
+        <p-selectButton [options]="currencies" [(ngModel)]="selectedCurrency"></p-selectButton>
       </header>
 
       <div class="w3-container">
-        <p>Lorem ipsum...</p>
+        <app-fiat-transaction-chart [selectedCurrency]="selectedCurrency"></app-fiat-transaction-chart>
       </div>
 
       <footer class="w3-container w3-light-green">

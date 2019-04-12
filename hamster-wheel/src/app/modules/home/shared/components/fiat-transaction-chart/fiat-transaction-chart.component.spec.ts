@@ -1,21 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { TransactionApiService } from 'src/app/core/services/transaction-api.service';
-import { TestsModule } from 'src/app/shared/modules/tests.module';
-import { FiatTransactionChartComponent } from '../shared/components/fiat-transaction-chart/fiat-transaction-chart.component';
-import { HomePageComponent } from './home-page.component';
+import { TestsModule } from '../../../../../shared/modules/tests.module';
+import { FiatTransactionChartComponent } from './fiat-transaction-chart.component';
 
-describe('HomePageComponent', () => {
-  let component: HomePageComponent;
-  let fixture: ComponentFixture<HomePageComponent>;
+describe('FiatTransactionChartComponent', () => {
+  let component: FiatTransactionChartComponent;
+  let fixture: ComponentFixture<FiatTransactionChartComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        HomePageComponent,
-        FiatTransactionChartComponent,
+        FiatTransactionChartComponent
       ],
       imports: [
-        TestsModule
+        TestsModule,
       ],
       providers: [
         TransactionApiService
@@ -25,7 +23,7 @@ describe('HomePageComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HomePageComponent);
+    fixture = TestBed.createComponent(FiatTransactionChartComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
